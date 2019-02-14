@@ -1,8 +1,8 @@
 const winston = require('winston');
 const mongoose = require('mongoose');
 const config = require('config');
-const dbConfig = config.get('dbConfig');
-const dbUri = `mongodb://${dbConfig.host}:${dbConfig.port}/${dbConfig.dbName}`
+const dbConf = config.get('dbConf');
+const dbUri = `mongodb://${dbConf.host}:${dbConf.port}/${dbConf.dbName}`
 console.log(dbUri)
 module.exports = function() {
     // Fix "collection.ensureIndex is deprecated. Use createIndexes instead." Deprecation Waring

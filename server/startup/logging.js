@@ -2,8 +2,8 @@ require('express-async-errors');
 const winston = require('winston');
 require('winston-mongodb');
 const config = require('config');
-const dbConfig = config.get('dbConfig');
-const dbUri = `mongodb://${dbConfig.host}:${dbConfig.port}/${dbConfig.dbName}`
+const dbConf = config.get('dbConf');
+const dbUri = `mongodb://${dbConf.host}:${dbConf.port}/${dbConf.dbName}`
 
 module.exports = function() {
     // ERROR HANDLINGS
@@ -16,14 +16,9 @@ module.exports = function() {
     winston.add(winston.transports.File, { filename: 'logs/logfile.log' });
     winston.add(winston.transports.MongoDB, {
         level: 'error',
-        db: dbUri
+        db: "mongodb://192.168.99.100:32770/medium-clone"
     });
 
     // TEST GENERIC ERROR
     // throw new Error('Something failed during startup.');
-
-    // TEST HANDLE PROMISES REJECTED
-    // const p = Promise.reject(new Error('Something failed miserably!'));
-    // p.then(() => console.log('Done'));
-
 }
